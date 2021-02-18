@@ -15,5 +15,14 @@ INSERT INTO tags (name) values ('rest')
 
 INSERT INTO tool_tag (tool_id, tag_id) values (1,1)
 INSERT INTO tool_tag (tool_id, tag_id) values (1,2)
+INSERT INTO tool_tag (tool_id, tag_id) values (1,3)
+INSERT INTO tool_tag (tool_id, tag_id) values (1,4)
+INSERT INTO tool_tag (tool_id, tag_id) values (1,5)
+INSERT INTO tool_tag (tool_id, tag_id) values (2,6)
+INSERT INTO tool_tag (tool_id, tag_id) values (2,7)
+INSERT INTO tool_tag (tool_id, tag_id) values (2,8)
+INSERT INTO tool_tag (tool_id, tag_id) values (2,9)
+INSERT INTO tool_tag (tool_id, tag_id) values (2,10)
+INSERT INTO tool_tag (tool_id, tag_id) values (2,11)
 
 

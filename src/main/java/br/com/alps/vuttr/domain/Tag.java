@@ -17,7 +17,7 @@ public class Tag {
 
     @ManyToMany
     @JoinTable(name = "tool_tag",
-    joinColumns = @JoinColumn(name = "tool_id"),
-    inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    joinColumns = @JoinColumn(name = "tag_id"),
+    inverseJoinColumns = @JoinColumn(name = "tool_id"))
     private List<Tool> tools;
 }
