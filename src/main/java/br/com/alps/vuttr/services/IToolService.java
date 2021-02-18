@@ -1,4 +1,4 @@
-package br.com.alps.vuttr.service;
+package br.com.alps.vuttr.services;
 
 import br.com.alps.vuttr.dto.responses.ToolResponseDTO;
 

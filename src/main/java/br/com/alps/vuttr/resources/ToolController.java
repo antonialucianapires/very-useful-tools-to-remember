@@ -1,7 +1,7 @@
 package br.com.alps.vuttr.resources;
 
 import br.com.alps.vuttr.dto.responses.ToolResponseDTO;
-import br.com.alps.vuttr.service.IToolService;
+import br.com.alps.vuttr.services.IToolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
