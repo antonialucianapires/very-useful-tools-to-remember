@@ -25,4 +25,14 @@ public class ToolService implements IToolService{
         }
     }
 
+    @Override
+    public List<ToolResponseDTO> getAllByTag(String tag) {
+        try {
+            List<Tool> toolsEntities = repository.findAllByTagsName(tag);
+            return  toolsEntities.stream().map(ToolResponseDTO::new).collect(Collectors.toList());
+        } catch (Exception ex) {
+            throw new VttrException(ex.getMessage());
+        }
+    }
+
 }
