@@ -1,12 +1,18 @@
 package br.com.alps.vuttr.domain;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Getter
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tools")
 public class Tool {
 
