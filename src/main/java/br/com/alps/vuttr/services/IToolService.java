@@ -12,7 +12,7 @@ public interface IToolService {
 
     List<ToolResponseDTO> getAllByTag(String tag);
 
-    ToolResponseDTO postNewDTO(ToolPostDTO postDTO);
+    ToolResponseDTO postNewTool(ToolPostDTO postDTO);
 
     void deleteById(Long id);
 

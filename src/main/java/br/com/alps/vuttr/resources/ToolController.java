@@ -42,7 +42,7 @@ public class ToolController {
     @PostMapping
     public ResponseEntity<?> postNewTool(@RequestBody ToolPostDTO postDTO) {
         try {
-            ToolResponseDTO toolDto = service.postNewDTO(postDTO);
+            ToolResponseDTO toolDto = service.postNewTool(postDTO);
 
             URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                     .buildAndExpand(toolDto.getId()).toUri();

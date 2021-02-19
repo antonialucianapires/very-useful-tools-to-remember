@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ToolRepository extends JpaRepository<Tool, Long> {
 
-    List<Tool> findAllByTagsName(String tag);
+    List<Tool> findAllByTagsNameIgnoreCase(String tag);
 }

@@ -38,8 +38,16 @@ public class ToolService implements IToolService {
     @Override
     public List<ToolResponseDTO> getAllByTag(String tag) {
         try {
-            List<Tool> toolsEntities = repository.findAllByTagsName(tag);
-            return toolsEntities.stream().map(ToolResponseDTO::new).collect(Collectors.toList());
+
+            Tag tagEntity = tagRepository.findByNameIgnoreCase(tag);
+
+            if(tagEntity != null) {
+                List<Tool> toolsEntities = repository.findAllByTagsNameIgnoreCase(tag);
+                return toolsEntities.stream().map(ToolResponseDTO::new).collect(Collectors.toList());
+            }
+
+            throw new VttrException("Tag not found");
+
         } catch (Exception ex) {
             throw new VttrException(ex.getMessage());
         }
@@ -47,7 +55,7 @@ public class ToolService implements IToolService {
 
     @Transactional
     @Override
-    public ToolResponseDTO postNewDTO(ToolPostDTO postDTO) {
+    public ToolResponseDTO postNewTool(ToolPostDTO postDTO) {
 
         try {
             Tool toolEntity = Tool.builder()
