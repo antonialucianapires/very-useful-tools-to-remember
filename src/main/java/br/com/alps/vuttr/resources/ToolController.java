@@ -4,6 +4,7 @@ import br.com.alps.vuttr.dto.errors.VttrException;
 import br.com.alps.vuttr.dto.request.ToolPostDTO;
 import br.com.alps.vuttr.dto.responses.ToolResponseDTO;
 import br.com.alps.vuttr.services.IToolService;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +51,18 @@ public class ToolController {
             return ResponseEntity.created(uri).body(toolDto);
         } catch (VttrException vttrException) {
             return ResponseEntity.badRequest().body(vttrException.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable Long id) {
+        try {
+            service.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } catch (ObjectNotFoundException onfe) {
+            return ResponseEntity.badRequest().body(onfe.getMessage());
+        } catch (VttrException vttrException) {
+            return ResponseEntity.status(500).body(vttrException.getMessage());
         }
     }
 

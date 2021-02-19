@@ -8,6 +8,7 @@ import br.com.alps.vuttr.dto.responses.TagResponseDTO;
 import br.com.alps.vuttr.dto.responses.ToolResponseDTO;
 import br.com.alps.vuttr.repositories.TagRepository;
 import br.com.alps.vuttr.repositories.ToolRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,6 +48,7 @@ public class ToolService implements IToolService {
     }
 
     @Transactional
+    @Override
     public ToolResponseDTO postNewDTO(ToolPostDTO postDTO) {
 
         try {
@@ -73,6 +76,27 @@ public class ToolService implements IToolService {
         }
 
 
+    }
+
+    @Override
+    public void deleteById(Long id) throws ObjectNotFoundException{
+
+        try {
+            Optional<Tool> tool = findById(id);
+            if(tool.isPresent()) {
+                repository.deleteById(id);
+            }
+
+            tool.orElseThrow(() -> new ObjectNotFoundException(tool.get().getId(),"Tool not found"));
+        } catch (Exception exception) {
+            throw new VttrException(exception.getMessage());
+        }
+
+    }
+
+    @Override
+    public Optional<Tool> findById(Long id) {
+        return repository.findById(id);
     }
 
 }
