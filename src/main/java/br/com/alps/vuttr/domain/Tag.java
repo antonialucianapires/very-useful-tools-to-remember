@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter
@@ -21,9 +20,6 @@ public class Tag {
     private Long id;
     private String name;
 
-    @ManyToMany
-    @JoinTable(name = "tool_tag",
-    joinColumns = @JoinColumn(name = "tag_id"),
-    inverseJoinColumns = @JoinColumn(name = "tool_id"))
-    private List<Tool> tools;
+    @ManyToOne
+    private Tool tool;
 }

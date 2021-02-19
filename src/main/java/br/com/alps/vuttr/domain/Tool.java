@@ -26,7 +26,7 @@ public class Tool implements Serializable {
     private String link;
     private String description;
 
-    @ManyToMany(mappedBy = "tools")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="tool")
     private List<Tag> tags;
 
 }

@@ -8,13 +8,11 @@ import br.com.alps.vuttr.dto.responses.TagResponseDTO;
 import br.com.alps.vuttr.dto.responses.ToolResponseDTO;
 import br.com.alps.vuttr.repositories.TagRepository;
 import br.com.alps.vuttr.repositories.ToolRepository;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -62,7 +60,8 @@ public class ToolService implements IToolService {
             List<Tag> tags = new ArrayList<>();
             Tag newTag;
             for (TagResponseDTO tag : postDTO.getTags()) {
-                newTag = Tag.builder().name(tag.getName()).tools(Collections.singletonList(toolEntity)).id(null).build();
+
+                newTag = Tag.builder().name(tag.getName()).id(null).build();
                 newTag = tagRepository.save(newTag);
                 tags.add(newTag);
             }
@@ -79,7 +78,7 @@ public class ToolService implements IToolService {
     }
 
     @Override
-    public void deleteById(Long id) throws ObjectNotFoundException{
+    public void deleteById(Long id) {
 
         try {
             Optional<Tool> tool = findById(id);
@@ -87,7 +86,7 @@ public class ToolService implements IToolService {
                 repository.deleteById(id);
             }
 
-            tool.orElseThrow(() -> new ObjectNotFoundException(tool.get().getId(),"Tool not found"));
+            tool.orElseThrow(() -> new VttrException("Tool not found " + id));
         } catch (Exception exception) {
             throw new VttrException(exception.getMessage());
         }
