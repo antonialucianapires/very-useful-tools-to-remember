@@ -21,19 +21,22 @@ public class ToolController {
     private IToolService service;
 
     @GetMapping
-    public ResponseEntity<List<ToolResponseDTO>> getAllTools(@RequestParam(name = "tag", required = false) String tag) {
+    public ResponseEntity<?> getAllTools(@RequestParam(name = "tag", required = false) String tag) {
 
-        List<ToolResponseDTO> tools;
-        if(tag == null) {
-            tools = service.getAllTools();
-            if(tools.isEmpty()) {
-                return ResponseEntity.noContent().build();
+        try {
+            List<ToolResponseDTO> tools;
+            if (tag == null) {
+                tools = service.getAllTools();
+                if (tools.isEmpty()) {
+                    return ResponseEntity.noContent().build();
+                }
+            } else {
+                tools = service.getAllByTag(tag);
             }
-        } else {
-            tools = service.getAllByTag(tag);
+            return ResponseEntity.ok(tools);
+        } catch (VttrException vttrException) {
+            return ResponseEntity.badRequest().body(vttrException.getMessage());
         }
-
-        return ResponseEntity.ok(tools);
     }
 
     @PostMapping
@@ -49,7 +52,6 @@ public class ToolController {
             return ResponseEntity.badRequest().body(vttrException.getMessage());
         }
     }
-
 
 
 }
