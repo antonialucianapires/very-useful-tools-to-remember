@@ -6,6 +6,8 @@ import br.com.alps.vuttr.config.validacao.errors.validation.exceptions.VttrExcep
 import br.com.alps.vuttr.dto.request.ToolPostDTO;
 import br.com.alps.vuttr.dto.responses.ToolResponseDTO;
 import br.com.alps.vuttr.services.IToolService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +20,13 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/tools")
+@Api(value = "Tools")
 public class ToolController {
 
     @Autowired
     private IToolService service;
 
+    @ApiOperation(value = "lists all tools or lists all tools by tag")
     @GetMapping
     public ResponseEntity<?> getAllTools(@RequestParam(name = "tag", required = false) String tag) {
 
@@ -46,6 +50,7 @@ public class ToolController {
         }
     }
 
+    @ApiOperation(value = "register a new tool")
     @PostMapping
     public ResponseEntity<?> postNewTool(@RequestBody @Valid ToolPostDTO postDTO) {
         try {
@@ -60,6 +65,7 @@ public class ToolController {
         }
     }
 
+    @ApiOperation(value = "delete tool by id")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Long id) {
         try {
