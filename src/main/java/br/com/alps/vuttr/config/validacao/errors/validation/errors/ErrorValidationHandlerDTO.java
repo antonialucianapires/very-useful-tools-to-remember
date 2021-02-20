@@ -1,4 +1,4 @@
-package br.com.alps.vuttr.config.validacao.errors;
+package br.com.alps.vuttr.config.validacao.errors.validation.errors;
 
 public class ErrorValidationHandlerDTO {
 

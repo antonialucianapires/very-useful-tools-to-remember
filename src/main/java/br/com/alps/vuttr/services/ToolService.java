@@ -1,6 +1,7 @@
 package br.com.alps.vuttr.services;
 
-import br.com.alps.vuttr.config.validacao.errors.VttrException;
+import br.com.alps.vuttr.config.validacao.errors.validation.exceptions.ObjectNotFoundException;
+import br.com.alps.vuttr.config.validacao.errors.validation.exceptions.VttrException;
 import br.com.alps.vuttr.domain.Tag;
 import br.com.alps.vuttr.domain.Tool;
 import br.com.alps.vuttr.dto.request.ToolPostDTO;
@@ -46,10 +47,10 @@ public class ToolService implements IToolService {
                 return toolsEntities.stream().map(ToolResponseDTO::new).collect(Collectors.toList());
             }
 
-            throw new VttrException("Tag not found");
+            throw new ObjectNotFoundException("Tag not found");
 
-        } catch (VttrException vttrException) {
-            throw vttrException;
+        } catch (ObjectNotFoundException onfe) {
+            throw onfe;
         }catch (Exception ex) {
             throw new VttrException(ex.getMessage());
         }
@@ -96,7 +97,7 @@ public class ToolService implements IToolService {
                 repository.deleteById(id);
             }
 
-            tool.orElseThrow(() -> new VttrException("Tool not found " + id));
+            tool.orElseThrow(() -> new ObjectNotFoundException("Tool not found " + id));
         } catch (Exception exception) {
             throw new VttrException(exception.getMessage());
         }

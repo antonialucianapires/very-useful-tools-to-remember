@@ -1,4 +1,4 @@
-package br.com.alps.vuttr.config.validacao.errors;
+package br.com.alps.vuttr.config.validacao.errors.validation.errors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

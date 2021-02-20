@@ -1,7 +1,8 @@
 package br.com.alps.vuttr.resources;
 
 
-import br.com.alps.vuttr.config.validacao.errors.VttrException;
+import br.com.alps.vuttr.config.validacao.errors.validation.exceptions.ObjectNotFoundException;
+import br.com.alps.vuttr.config.validacao.errors.validation.exceptions.VttrException;
 import br.com.alps.vuttr.dto.request.ToolPostDTO;
 import br.com.alps.vuttr.dto.responses.ToolResponseDTO;
 import br.com.alps.vuttr.services.IToolService;
@@ -36,8 +37,12 @@ public class ToolController {
                 tools = service.getAllByTag(tag);
             }
             return ResponseEntity.ok(tools);
+        } catch (ObjectNotFoundException onfe) {
+            return ResponseEntity.status(404).body(onfe.getMessage());
         } catch (VttrException vttrException) {
-            return ResponseEntity.badRequest().body(vttrException.getMessage());
+            return ResponseEntity.status(400).body(vttrException.getMessage());
+        } catch (Exception ex) {
+            return ResponseEntity.status(500).body(ex.getMessage());
         }
     }
 
@@ -60,6 +65,8 @@ public class ToolController {
         try {
             service.deleteById(id);
             return ResponseEntity.noContent().build();
+        } catch (ObjectNotFoundException onfe) {
+            return ResponseEntity.status(404).body(onfe.getMessage());
         } catch (VttrException vttrException) {
             return ResponseEntity.status(400).body(vttrException.getMessage());
         } catch (Exception ex) {
