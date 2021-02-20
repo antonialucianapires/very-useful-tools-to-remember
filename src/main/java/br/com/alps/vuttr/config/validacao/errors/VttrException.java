@@ -1,4 +1,4 @@
-package br.com.alps.vuttr.dto.errors;
+package br.com.alps.vuttr.config.validacao.errors;
 
 public class VttrException extends RuntimeException {
 

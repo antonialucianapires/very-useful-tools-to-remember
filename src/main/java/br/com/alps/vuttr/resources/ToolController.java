@@ -1,6 +1,7 @@
 package br.com.alps.vuttr.resources;
 
-import br.com.alps.vuttr.dto.errors.VttrException;
+
+import br.com.alps.vuttr.config.validacao.errors.VttrException;
 import br.com.alps.vuttr.dto.request.ToolPostDTO;
 import br.com.alps.vuttr.dto.responses.ToolResponseDTO;
 import br.com.alps.vuttr.services.IToolService;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -40,7 +42,7 @@ public class ToolController {
     }
 
     @PostMapping
-    public ResponseEntity<?> postNewTool(@RequestBody ToolPostDTO postDTO) {
+    public ResponseEntity<?> postNewTool(@RequestBody @Valid ToolPostDTO postDTO) {
         try {
             ToolResponseDTO toolDto = service.postNewTool(postDTO);
 

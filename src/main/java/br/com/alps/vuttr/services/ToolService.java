@@ -1,8 +1,8 @@
 package br.com.alps.vuttr.services;
 
+import br.com.alps.vuttr.config.validacao.errors.VttrException;
 import br.com.alps.vuttr.domain.Tag;
 import br.com.alps.vuttr.domain.Tool;
-import br.com.alps.vuttr.dto.errors.VttrException;
 import br.com.alps.vuttr.dto.request.ToolPostDTO;
 import br.com.alps.vuttr.dto.responses.TagResponseDTO;
 import br.com.alps.vuttr.dto.responses.ToolResponseDTO;
