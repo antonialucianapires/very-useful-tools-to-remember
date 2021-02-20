@@ -39,16 +39,18 @@ public class ToolService implements IToolService {
     public List<ToolResponseDTO> getAllByTag(String tag) {
         try {
 
-            Tag tagEntity = tagRepository.findByNameIgnoreCase(tag);
+            List<Tag> tagEntity = tagRepository.findByNameIgnoreCase(tag);
 
-            if(tagEntity != null) {
+            if(!tagEntity.isEmpty()) {
                 List<Tool> toolsEntities = repository.findAllByTagsNameIgnoreCase(tag);
                 return toolsEntities.stream().map(ToolResponseDTO::new).collect(Collectors.toList());
             }
 
             throw new VttrException("Tag not found");
 
-        } catch (Exception ex) {
+        } catch (VttrException vttrException) {
+            throw vttrException;
+        }catch (Exception ex) {
             throw new VttrException(ex.getMessage());
         }
     }
@@ -69,7 +71,7 @@ public class ToolService implements IToolService {
             Tag newTag;
             for (TagResponseDTO tag : postDTO.getTags()) {
 
-                newTag = Tag.builder().name(tag.getName()).id(null).build();
+                newTag = Tag.builder().name(tag.getName().toLowerCase()).id(null).tool(toolEntity).build();
                 newTag = tagRepository.save(newTag);
                 tags.add(newTag);
             }
