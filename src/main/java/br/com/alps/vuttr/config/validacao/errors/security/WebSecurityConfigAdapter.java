@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -25,11 +26,17 @@ public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
         if (userRepository.count() == 0) {
             User user = User.builder()
                     .login("admin")
-                    .password("admin")
+                    .password(passwordEncoder().encode("admin"))
                     .build();
             userRepository.save(user);
         }
 
-        builder.userDetailsService(login -> new UserCustomDTO(userRepository.findByLogin(login)));
+        builder.userDetailsService(login -> new UserCustomDTO(userRepository.findByLogin(login))).passwordEncoder(passwordEncoder());
     }
+
+    @Bean
+    public static BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 }
