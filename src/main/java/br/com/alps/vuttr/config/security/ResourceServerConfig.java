@@ -1,4 +1,4 @@
-package br.com.alps.vuttr.config.validacao.errors.security;
+package br.com.alps.vuttr.config.security;
 
 
 import org.springframework.context.annotation.Configuration;

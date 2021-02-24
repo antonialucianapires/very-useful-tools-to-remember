@@ -1,4 +1,4 @@
-package br.com.alps.vuttr.config.validacao.errors.swagger;
+package br.com.alps.vuttr.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

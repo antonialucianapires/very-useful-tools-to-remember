@@ -1,6 +1,6 @@
 package br.com.alps.vuttr.services;
 
-import br.com.alps.vuttr.config.validacao.errors.validation.exceptions.VttrException;
+import br.com.alps.vuttr.config.validation.exceptions.VttrException;
 import br.com.alps.vuttr.domain.User;
 import br.com.alps.vuttr.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService implements IUserService{

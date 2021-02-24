@@ -1,9 +1,7 @@
 package br.com.alps.vuttr.resources;
 
-import br.com.alps.vuttr.config.validacao.errors.validation.exceptions.ObjectNotFoundException;
-import br.com.alps.vuttr.config.validacao.errors.validation.exceptions.VttrException;
+import br.com.alps.vuttr.config.validation.exceptions.VttrException;
 import br.com.alps.vuttr.domain.User;
-import br.com.alps.vuttr.repositories.UserRepository;
 import br.com.alps.vuttr.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

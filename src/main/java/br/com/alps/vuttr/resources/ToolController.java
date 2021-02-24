@@ -1,8 +1,8 @@
 package br.com.alps.vuttr.resources;
 
 
-import br.com.alps.vuttr.config.validacao.errors.validation.exceptions.ObjectNotFoundException;
-import br.com.alps.vuttr.config.validacao.errors.validation.exceptions.VttrException;
+import br.com.alps.vuttr.config.validation.exceptions.ObjectNotFoundException;
+import br.com.alps.vuttr.config.validation.exceptions.VttrException;
 import br.com.alps.vuttr.dto.request.ToolPostDTO;
 import br.com.alps.vuttr.dto.responses.ToolResponseDTO;
 import br.com.alps.vuttr.services.IToolService;
