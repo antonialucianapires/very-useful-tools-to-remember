@@ -19,6 +19,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private static final String CLIENT = "client-id";
     private static final String SECRET = "secret-id";
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         security.tokenKeyAccess("permitAll()")
@@ -35,5 +38,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .scopes("read", "write", "trust")
                 .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_IN_SECONDS)
                 .refreshTokenValiditySeconds(REFRESH_TOKEN_VALIDITY_IN_SECONDS);
+    }
+
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints.authenticationManager(authenticationManager)
+                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
     }
 }
