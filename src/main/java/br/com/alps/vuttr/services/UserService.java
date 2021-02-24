@@ -4,6 +4,7 @@ import br.com.alps.vuttr.config.validacao.errors.validation.exceptions.VttrExcep
 import br.com.alps.vuttr.domain.User;
 import br.com.alps.vuttr.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +24,11 @@ public class UserService implements IUserService{
     @Override
     public User saveUser(User user) {
         try {
-            return repository.save(user);
+            User newUser = User.builder()
+                    .login(user.getLogin())
+                    .password(new BCryptPasswordEncoder().encode(user.getPassword()))
+                    .build();
+            return repository.save(newUser);
         } catch (Exception exception)  {
             throw new VttrException("Failed to save user. Ex: " + exception.getMessage());
         }
